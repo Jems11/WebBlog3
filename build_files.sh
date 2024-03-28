@@ -1,4 +1,4 @@
 
 echo "BUILD START"
-python -m pip install requirements.txt
+python3.9 -m pip install requirements.txt
 echo "BUILD END"
