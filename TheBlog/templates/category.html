@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} {{postg.category}} {%endblock%}
+{% block content %}
+<div class="main-show-category-post py-3">
+    <div class="container">
+
+        {% if category_Post %}
+        <h1>Category : {{cats}}</h1>
+        <ul>
+            {% for post in category_Post %}
+            <li>
+                <a href="{% url 'ArticleDetail' post.pk %}" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <h1>{{post.title}}</h1>
+                    </div>
+                </a>
+                <div>
+                    <span>{{post.author.first_name}} {{post.author.last_name}}</span>
+                </div>
+                <div>
+                    <span>Published Date : {{post.post_date}}</span>
+                    {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                    <span><small><a href="{%url 'EditPost' post.pk %}">(Edit)</a></small></span>
+                    <span><small><a href="{%url 'DeletePost' post.pk %}">(Delete)</a></small></span>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                <div>
+                    <h6>{{post.body|slice:":200"|safe}}</h5>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <h1>{{cats}} Category posts does not exists.</h1>
+        <small>Go to <a href="{% url 'AddPost' %}"> Add Post </a></small>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

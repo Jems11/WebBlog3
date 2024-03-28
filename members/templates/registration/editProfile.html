@@ -1,0 +1,20 @@
+{%extends 'base.html' %}
+{% block title %} Edit Profile {%endblock%}
+{% block content %}
+<div class="main-edit-profile py-5">
+    <div class="container">
+
+        <h1>Edit Settings</h1>
+        {% if user.is_authenticated %}
+        <form action="" method="post">
+            {%csrf_token%}
+            {{form.as_div}}
+            <p>For Change Password <a href="/{{user.id}}/password/">Click Here</a></p>
+            <button class="btn btn-secondary">Update</button>
+        </form>
+        {% else %}
+        <h1>Oops.. You can't edit profile</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

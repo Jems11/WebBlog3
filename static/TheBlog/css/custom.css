@@ -1,0 +1,255 @@
+label {
+  display: block !important;
+  margin-bottom: 10px;
+}
+
+.main-image-container {
+  background-image: url('../images/main-bg-img.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: cover;
+}
+
+nav.navbar .nav-link {
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+.main-content-wrapper {
+  max-width: 720px;
+  margin: 100px 0;
+}
+
+.main-content-wrapper .main-content-header {
+  color: white;
+}
+
+.main-content-wrapper .main-content-title {
+  color: white;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.main-content-wrapper .main-content-desc {
+  color: white;
+  margin-top: 20px;
+}
+
+.main-content-wrapper .main-content-btn {
+  color: white;
+  margin-top: 20px;
+}
+
+.main-content-wrapper .read-more-btn {
+  background-color: whitesmoke;
+}
+
+
+.section-1 {
+  height: fit-content;
+}
+
+.section-2 {
+  padding: 50px;
+  background-color: whitesmoke;
+}
+
+.blog-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-wrapper {
+  background-color: whitesmoke;
+}
+
+.main-category {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+footer.main-footer {
+  background-image: url('../images/main-bg-img.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+
+}
+
+.footer-categories-header {
+  font-size: 24px;
+}
+
+.footer-categories ul {
+  padding: 0;
+}
+
+.main-show-category-post {
+  background-color: whitesmoke;
+  height: 90vh;
+}
+
+.main-show-category {
+  background-color: whitesmoke;
+  height: 75vh;
+}
+
+.ul-category-list-name {
+  text-decoration: none;
+  color: gray;
+  font-size: 18px;
+  position: relative;
+  padding: 0.2em 0;
+}
+
+.ul-category-list-name:hover {
+  color: blue;
+}
+
+.ul-category-list-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: blueviolet;
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.ul-category-list-name:hover::after,
+.ul-category-list-name:focus::after {
+  opacity: 1;
+  transform: translate3d(0, 0.2em, 0);
+}
+
+.ul-category-list-name {
+  overflow: hidden;
+}
+
+.ul-category-list-name::after {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.ul-category-list-name:hover::after,
+.ul-category-list-name:focus::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.main-article-detail {
+  background-color: whitesmoke;
+}
+
+.main-edit-profile {
+  background-color: whitesmoke;
+}
+
+.main-edit-profile-page {
+  background-color: whitesmoke;
+}
+
+.main-show-profile-page {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.main-login {
+  background-color: whitesmoke;
+  height: 90vh;
+}
+
+.main-register {
+  background-color: whitesmoke;
+}
+
+.main-password-change {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.main-password-success {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.main-edit-post {
+  background-color: whitesmoke;
+}
+
+.main-delete-post {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.main-comment-page {
+  background-color: whitesmoke;
+}
+
+.main-create-profile-page {
+  background-color: whitesmoke;
+}
+
+.post-body img {
+  width: 100%;
+}
+
+
+.user-profile-card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.suggested-post-card {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.main-header-img-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+/* `sm` applies to x-small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .section-2 {
+    padding: 20px;
+  }
+
+  .main-content-wrapper .main-content-title {
+    font-size: 20px;
+  }
+
+  .main-content-wrapper .main-content-desc {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .list-posts {
+    padding: 0px;
+  }
+
+  .main-content-wrapper {
+    margin: 50px 0;
+  }
+
+  .main-header-img-wrapper {
+    margin-bottom: 50px;
+  }
+}
+
+/* `md` applies to small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {}
+
+.dot {
+  border: 1px solid;
+  border-radius: 20px;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: beige;
+}

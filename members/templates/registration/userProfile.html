@@ -1,0 +1,59 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block title %} {{user_profile}} User Profile {%endblock%}
+{% block content %}
+<div class="main-show-profile-page py-5">
+  <div class="container">
+
+
+    <h1>User Profile</h1>
+
+    <div class="card mb-3 user-profile-card">
+      <div class="row g-0 text-center text-md-start">
+        <div class="col-md-2">
+          {% if user_profile.profile_pic %}
+          <img src="{{ user_profile.profile_pic.url }}" class="img-fluid rounded-start" alt="profile_image" width="200"
+            height="200">
+          {% else %}
+          <img src="{% static '/TheBlog/images/default_Profile_pic.jpg' %}" alt="" width="200" height="200">
+          {% endif %}
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{user_profile.user.first_name}} {{user_profile.user.last_name}} </h5>
+            <div class="small text-body-secondary mb-3">
+
+              {% if user_profile.website_url %}
+              <a href="{{user_profile.website_url}}" target="_blank">Website</a>
+              {% endif %}
+
+              {% if user_profile.twitter_url %}
+              | <a href="{{user_profile.twitter_url}}" target="_blank">Twitter </a>
+              {% endif %}
+
+
+              {% if user_profile.linkedin_url %}
+              | <a href="{{user_profile.linkedin_url}}" target="_blank">Linkedin </a>
+              {% endif %}
+
+
+              {% if user_profile.instagram_url %}
+              | <a href="{{user_profile.instagram_url }}" target="_blank">Instagram</a>
+              {% endif %}
+
+
+              {% if user_profile.facebook_url %}
+              | <a href="{{user_profile.facebook_url}}" target="_blank">Facebook </a>
+              {% endif %}
+
+            </div>
+            <p class="card-text">{{user_profile.bio}}</p>
+            <p class="card-text"><small class="text-body-secondary">{{user_profile.user.last_login}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

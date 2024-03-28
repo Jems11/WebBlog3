@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Category of Blog {%endblock%}
+{% block content %}
+<div class="main-show-category py-3">
+    <div class="container">
+
+
+        <h1>Category List</h1>
+        <ul class="ul-category-list">
+            {% for item in cats_menu_list %}
+            <li>
+                <div>
+                    <a href="{% url 'Categories' item %}" class="ul-category-list-name"> {{item}}</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

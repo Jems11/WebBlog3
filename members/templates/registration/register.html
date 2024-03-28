@@ -1,0 +1,21 @@
+{%extends 'base.html' %}
+{% block title %} Register {%endblock%}
+{% block content %}
+<div class="main-register py-5">
+    <div class="container">
+
+
+        <h1>Register</h1>
+        {% if not user.is_authenticated %}
+        <form action="" method="post">
+            {%csrf_token%}
+            {{form.as_div}}
+            <button class="btn btn-secondary">Register</button>
+        </form>
+        {% else %}
+        <h1>Oops.. You can't register again.</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{%extends 'base.html' %}
+{% block title %} Delete Post {%endblock%}
+{% block content %}
+<div class="main-delete-post py-5">
+    <div class="container">
+
+
+        {% if user.id == post.author.id %}
+        {% if user.is_authenticated %}
+        <h1>Delete Post..</h1>
+
+        <p>Are you sure want to Delete this post : <strong> {{post.title}}</strong></p>
+        <form action="" method="post">
+            {%csrf_token%}
+            <div class="btn-delete-post-wrapper">
+                <button class="btn btn-danger">Delete</button>
+                <a href="{% url 'ArticleDetail' post.pk %}" class="btn btn-secondary">No</a>
+
+            </div>
+        </form>
+
+        {% else %}
+        <h1>You are logged out from session.Please <a href="{% url 'login' %}"> Login </a>to get access for delete post.
+        </h1>
+        {% endif %}
+        {% else %}
+        <h1>You are not allowed to delete this blog</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

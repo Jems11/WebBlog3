@@ -1,0 +1,179 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block title %} {{post.title_tag}} {%endblock%}
+{% block content %}
+
+<div class="main-article-detail py-3">
+    <div class="container">
+
+
+        <div class="description" style="max-width: 680px;margin: 0 auto;">
+            <h1>{{post.title}}</h1>
+            <div class="d-flex">
+                <div>
+                    {% if post.author.profile.profile_pic %}
+                    <img src="{{post.author.profile.profile_pic.url}}" alt="" class="rounded-circle" width="50"
+                        height="50">
+                    {% else %}
+                        <img src="{% static 'TheBlog/images/default_Profile_pic.jpg' %}" alt="" class="rounded-circle" width="50"
+                        height="50">
+                    {% endif %}
+                </div>
+                <div class="d-flex flex-column ms-3">
+                    <span>{{post.author.first_name}} {{post.author.last_name}}</span>
+                    <span>{{post.post_date}}</span>
+                </div>
+            </div>
+            <div>
+                <span>Category : <a href="{% url 'Categories' post.category|slugify %}"> {{post.category}}</a></span>
+            </div>
+            <div>
+
+            </div>
+            {% if user.id == post.author.id %}
+            {% if user.is_authenticated %}
+            <div class="mt-2">
+
+                <span><small><a href="{%url 'EditPost' post.pk %}"><i class="fa fa-edit"
+                                style="font-size: 24px;"></i></a></small></span>
+
+                <span><small><a href="{%url 'DeletePost' post.pk %}"><i class="fa fa-trash" aria-hidden="true"
+                                style="font-size: 24px;"></i></a></small></span>
+            </div>
+            {% endif %}
+            {% endif %}
+            <hr>
+            {% if post.header_image %}
+            <img src="{{post.header_image.url}}" alt="header_image" style="width: 100%;">
+            {% endif %}
+            
+            <div class="post-body mt-4">
+                {{post.body|safe}}
+            </div>
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'likePost' post.id %}">
+                    {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" class="btn btn-danger btn-sm" name="like_post_id"
+                        value="{{post.id}}">Unlike</button>
+                    {% else %}
+                    <button type="submit" class="btn btn-primary btn-sm" name="like_post_id"
+                        value="{{post.id}}">Like</button>
+                    {% endif %}
+
+                </form>
+                {% else %}
+                <small><a href="{% url 'login' %}">Login</a> to like</small>
+                {% endif %}
+                <small class="ms-2"> - {{ total_likes }} Likes</small>
+            </div>
+            <br>
+            
+            <h2>Comments..</h2>
+            {% if not post.comments.all %}
+            <a href="{% url 'AddComment' post.id %}">Add Comment</a>
+            {% else %}
+            <a href="{% url 'AddComment' post.id %}">Add Comment</a>
+            <br />
+            {% for comment in post.comments.all %}
+            <div class="my-3">
+                <strong>{{comment.name}} </strong>- {{comment.date_added}}
+                <br />
+                {{comment.body}}
+            </div>
+            {% endfor %}
+            {% endif %}
+           
+            <br>
+            <a href="{% url 'Home' %}" type="button" class="btn btn-secondary btn-sm mt-3">&lt;&lt;Back to Home</a>
+            <hr>
+            <h4>Author Profile</h4>
+            <div class="card mb-3 user-profile-card">
+                <div class="row g-0 text-center text-md-start">
+                    <div class="col-md-3">
+                        {% if post.author.profile.profile_pic %}
+                        <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start"
+                            alt="profile_image" width="200" height="200">
+                        {% else %}
+                        <img src="{% static '/TheBlog/images/default_Profile_pic.jpg' %}" alt="" style="width: 100%;">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{post.author.first_name}} {{post.author.last_name}} </h5>
+                            <div class="small text-body-secondary mb-3">
+                                    {% if post.author.profile.id %}
+                                        <a href="{% url 'ShowProfile' post.author.profile.id %}">Profile</a>
+                                    {% endif %}
+                                    
+                                    {% if post.author.profile.website_url %}
+                                    | <a href="{{post.author.profile.website_url}}" target="_blank">Website</a>
+                                    {% endif %}
+
+                                    {% if post.author.profile.twitter_url %}
+                                    | <a href="{{post.author.profile.twitter_url}}" target="_blank">Twitter </a>
+                                    {% endif %}
+
+
+                                    {% if post.author.profile.linkedin_url %}
+                                    | <a href="{{post.author.profile.linkedin_url}}" target="_blank">Linkedin </a>
+                                    {% endif %}
+
+
+                                    {% if post.author.profile.instagram_url %}
+                                    | <a href="{{post.author.profile.instagram_url }}" target="_blank">Instagram</a>
+                                    {% endif %}
+
+
+                                    {% if post.author.profile.facebook_url %}
+                                    | <a href="{{post.author.profile.facebook_url}}" target="_blank">Facebook </a>
+                                    {% endif %}
+
+                            </div>
+                            <p class="card-text">{{post.author.profile.bio}}</p>
+                            <p class="card-text"><small class="text-body-secondary">{{post.author.last_login}}</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="suggested_post">
+
+
+                {% if related_post %}
+                <h2 class="pb-2">More from {{post.author.first_name}} {{post.author.last_name}}</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for relPost in related_post %}
+                    {% if relPost.id != post.pk %}
+                    <div class="col">
+                        <div class="card h-100 suggested-post-card">
+                            {% if relPost.header_image %}
+                            <img src="{{relPost.header_image.url}}" class="card-img-top" alt="image" width="200"
+                                height="200">
+                            {%endif%}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'ArticleDetail' relPost.id %}" target="_blank"
+                                        rel="noopener noreferrer">
+                                        {{relPost.title}}
+                                    </a>
+                                </h5>
+                                <p class="card-text">{{relPost.body|safe|slice:250}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">{{relPost.post_date}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

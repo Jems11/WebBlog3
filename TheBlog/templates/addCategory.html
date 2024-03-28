@@ -1,0 +1,24 @@
+{%extends 'base.html' %}
+{% block title %} Create New BLog Category {%endblock%}
+{% block content %}
+<div class="main-category py-3">
+    <div class="container">
+
+        {% if user.is_authenticated %}
+        <form action="" method="post">
+            {%csrf_token%}
+            <!-- {{form.as_div}} -->
+            <div class="mb-3">
+                <label for="category">Category:</label>
+                <input type="text" class="form-control" name="category" maxlength="250" required="" id="category">
+            </div>
+            <button class="btn btn-secondary">Add Category</button>
+        </form>
+        {% else %}
+        <h1>You are logged out from session.Please <a href="{% url 'login' %}"> Login </a>to get access for Add
+            Category.</h1>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
