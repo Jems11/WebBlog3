@@ -91,12 +91,12 @@ footer.main-footer {
 
 .main-show-category-post {
   background-color: whitesmoke;
-  height: 90vh;
+  height: auto;
 }
 
 .main-show-category {
   background-color: whitesmoke;
-  height: 75vh;
+  height: auto;
 }
 
 .ul-category-list-name {
